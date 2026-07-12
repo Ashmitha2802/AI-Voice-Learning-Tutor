@@ -1,6 +1,6 @@
 import re
 from services.wikipedia_service import get_summary
-from services.dictionary_service import get_meaning
+
 from services.book_service import recommend_books
 
 
@@ -34,7 +34,7 @@ def resource_agent(query):
     topic = clean_topic(query)
 
     summary = get_summary(topic)
-    definition = get_meaning(topic)
+
     books = recommend_books(topic)
 
     return f"""
@@ -49,12 +49,6 @@ def resource_agent(query):
 ## 📝 Summary
 
 {summary}
-
----
-
-## 📘 Definition
-
-{definition}
 
 ---
 
