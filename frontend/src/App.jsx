@@ -24,6 +24,7 @@ export default function App() {
       const aiMessage = {
         role: response.Agent,
         content: response.Response,
+        topic: response.Topic || "",
       };
 
       setMessages((prev) => [...prev, aiMessage]);

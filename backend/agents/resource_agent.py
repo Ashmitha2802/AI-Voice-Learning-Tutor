@@ -1,3 +1,4 @@
+import re
 from services.wikipedia_service import get_summary
 from services.dictionary_service import get_meaning
 from services.book_service import recommend_books
@@ -6,20 +7,26 @@ from services.book_service import recommend_books
 def clean_topic(query):
     query = query.lower()
 
-    words = [
-        "define",
+    phrases = [
+        "tell me about",
+        "tell me",
         "what is",
+        "define",
         "explain",
         "about",
-        "tell me about",
-        "give details about",
+        "notes about",
+        "give notes on",
+        "generate notes on",
+        "generate notes about",
         "describe",
     ]
 
-    for word in words:
-        query = query.replace(word, "")
+    for phrase in phrases:
+        query = query.replace(phrase, "")
 
-    return query.strip().title()
+    query = re.sub(r"\s+", " ", query).strip()
+
+    return query.title()
 
 
 def resource_agent(query):
@@ -34,6 +41,7 @@ def resource_agent(query):
 # 📚 Resource Information
 
 ## 📖 Topic
+
 {topic}
 
 ---

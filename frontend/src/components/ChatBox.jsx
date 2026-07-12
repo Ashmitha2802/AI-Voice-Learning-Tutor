@@ -100,22 +100,50 @@ export default function ChatBox({ messages, loading }) {
 
               {msg.role !== "User" && (
 
-                <button
-                  onClick={() => speak(msg.content)}
-                  className="
-                    bg-zinc-800
-                    hover:bg-zinc-700
-                    border
-                    border-zinc-700
-                    px-4
-                    py-2
-                    rounded-xl
-                    text-sm
-                    transition
-                  "
-                >
-                  🔊 Listen
-                </button>
+                <div className="flex gap-3">
+
+  <button
+    onClick={() => speak(msg.content)}
+    className="
+      bg-zinc-800
+      hover:bg-zinc-700
+      border
+      border-zinc-700
+      px-4
+      py-2
+      rounded-xl
+      text-sm
+      transition
+    "
+  >
+    🔊 Listen
+  </button>
+
+  {msg.role === "Notes" && msg.topic && (
+
+    <button
+      onClick={() =>
+        window.open(
+          `https://ai-voice-learning-tutor.onrender.com/download_pdf?topic=${encodeURIComponent(msg.topic)}`,
+          "_blank"
+        )
+      }
+      className="
+        bg-emerald-700
+        hover:bg-emerald-600
+        px-4
+        py-2
+        rounded-xl
+        text-sm
+        transition
+      "
+    >
+      📄 Download PDF
+    </button>
+
+  )}
+
+</div>
 
               )}
 

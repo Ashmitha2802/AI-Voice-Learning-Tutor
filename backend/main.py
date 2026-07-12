@@ -59,9 +59,25 @@ def chat(query: str):
 
     elif decision == "Notes":
 
+        topic = query
+
+        words = [
+            "generate notes on",
+            "generate notes about",
+            "notes on",
+            "notes about",
+            "about",
+        ]
+
+        for word in words:
+            topic = topic.lower().replace(word, "")
+
+        topic = topic.strip().title()
+
         return {
             "Agent": "Notes",
-            "Response": notes_agent(query)
+            "Topic": topic,
+            "Response": notes_agent(topic)
         }
 
     else:
